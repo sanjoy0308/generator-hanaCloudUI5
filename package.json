@@ -1,0 +1,25 @@
+{
+  "name": "generator-hanacloudui5",
+  "version": "1.0.0",
+  "description": "This generator will generate template for migration of UI5 to HANA cloud environment",
+  "files": [
+    "app",
+    "router"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjoy0308/hanaCloudUI5.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "sanjoy0308",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjoy0308/hanaCloudUI5/issues"
+  },
+  "homepage": "https://github.com/sanjoy0308/hanaCloudUI5#readme",
+  "dependencies": {
+    "yeoman-generator": "^5.4.0"
+  }
+}
