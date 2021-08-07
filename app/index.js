@@ -1,9 +1,11 @@
-var Generator = require('yeoman-generator');
+const Generator = require('yeoman-generator'),
+  yosay = require("yosay"),
+  chalk = require("chalk");
 
 module.exports = class extends Generator {
 
   initializing() {
-    console.log("My UI5 Cloud Migration generator is initialized.");
+    this.log(yosay(`Welcome to the ${chalk.red("HANA Cloud UI5")} generator!`));
     this.composeWith("easy-ui5");
   }
 
