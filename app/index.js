@@ -39,14 +39,7 @@ module.exports = class extends Generator {
       {
         type: "confirm",
         name: "git",
-        message: "Please confirm the git repository url",
-        validate: function (value) {
-          //Check blank
-          if (value) {
-            return true;
-          }
-          return false;
-        }
+        message: "Please confirm the git repository url"
       }
     ]);
     this.log("GIT URL:", answers.name);
