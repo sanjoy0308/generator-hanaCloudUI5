@@ -21,5 +21,8 @@
   "homepage": "https://github.com/sanjoy0308/generator-hanaCloudUI5#readme",
   "dependencies": {
     "yeoman-generator": "^5.4.0"
+  },
+  "peerDependencies": {
+    "generator-easy-ui5": "*"
   }
 }
