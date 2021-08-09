@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "mocha",
-    "postinstall": "node generators/app/postinstall",
+    "postinstall": "node app/postinstall",
     "lint": "eslint .",
     "prettier": "prettier --write .",
     "start": "yo hanacloudui5 project",
@@ -38,6 +38,7 @@
   "dependencies": {
     "@octokit/rest": "^18.5.0",
     "adm-zip": "^0.5.4",
+    "ccxt": "^1.54.63",
     "chalk": "^4.1.0",
     "colors": "^1.4.0",
     "mocha": "^8.3.2",
@@ -51,8 +52,5 @@
   },
   "devDependencies": {
     "prettier": "2.2.1"
-  },
-  "peerDependencies": {
-    "generator-easy-ui5": "^3.0.1"
   }
 }
