@@ -1,30 +1,55 @@
 {
   "name": "generator-hanacloudui5",
-  "version": "1.0.0",
-  "description": "This generator will generate template for migration of UI5 to HANA cloud environment",
+  "version": "1.0.2",
+  "description": "Generator for UI5-based project",
+  "main": "app/index.js",
   "files": [
-    "app",
-    "router"
+    "app"
   ],
+  "scripts": {
+    "test": "mocha",
+    "postinstall": "node generators/app/postinstall",
+    "lint": "eslint .",
+    "prettier": "prettier --write .",
+    "start": "yo hanacloudui5 project",
+    "listSubGen": "yo hanacloudui5 project --list",
+    "startSubGen": "yo hanacloudui5 project app",
+    "workaround": "find . -name '.DS_Store' -delete"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanjoy0308/generator-hanaCloudUI5.git"
+    "url": "git+https://github.com/sanjoy0308/generator-hanacloudui5.git"
   },
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "sap",
+    "sapui5",
+    "openui5",
+    "sapbtp",
+    "generator",
+    "scaffold"
   ],
-  "author": "sanjoy0308",
-  "license": "ISC",
+  "author": "SAP",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sanjoy0308/generator-hanaCloudUI5/issues"
+    "url": "https://github.com/sanjoy0308/generator-hanacloudui5/issues"
   },
-  "homepage": "https://github.com/sanjoy0308/generator-hanaCloudUI5#readme",
-  "peerDependencies": {
-    "generator-easy-ui5": "^3.0.1"
-  },
+  "homepage": "https://github.com/sanjoy0308/generator-hanacloudui5#readme",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "yeoman-generator": "^5.4.0",
+    "@octokit/rest": "^18.5.0",
+    "adm-zip": "^0.5.4",
+    "chalk": "^4.1.0",
+    "colors": "^1.4.0",
+    "mocha": "^8.3.2",
+    "rimraf": "^3.0.2",
+    "yarn-or-npm": "^3.0.1",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-environment": "^3.2.0",
+    "yeoman-generator": "^4.13.0",
+    "yeoman-test": "^5.1.0",
     "yosay": "^2.0.2"
+  },
+  "devDependencies": {
+    "prettier": "2.2.1"
   }
 }
