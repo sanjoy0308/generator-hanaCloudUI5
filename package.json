@@ -1,6 +1,6 @@
 {
   "name": "generator-hanacloudui5",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generator for UI5-based project",
   "main": "app/index.js",
   "files": [
@@ -51,5 +51,8 @@
   },
   "devDependencies": {
     "prettier": "2.2.1"
+  },
+  "peerDependencies": {
+    "generator-easy-ui5": "^3.0.1"
   }
 }
