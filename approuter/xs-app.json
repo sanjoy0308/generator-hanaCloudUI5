@@ -1,0 +1,8 @@
+{
+  "welcomeFile": "comorgNameoldUI5App/",
+  "authenticationMethod": "none",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": []
+}
