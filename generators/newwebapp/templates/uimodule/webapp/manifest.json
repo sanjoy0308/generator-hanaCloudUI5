@@ -30,7 +30,7 @@
     "flexEnabled": true,
     "rootView": {
       "viewName": "<%=appId%>.view.<%=viewname%>",
-      "type": "<%=viewtype%>",
+      "type": "xml",
       "async": true,
       "id": "idAppControl"
     },

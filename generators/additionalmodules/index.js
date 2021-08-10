@@ -20,7 +20,7 @@ module.exports = class extends Generator {
         this.sourceRoot(path.join(__dirname, "templates"));
 
         const oConfig = this.options.oneTimeConfig;
-        const platformIsAppRouter = this.options.oneTimeConfig.platform.includes("Application Router"); // aka no destination service etc needed
+        const platformIsAppRouter = false; // aka no destination service etc needed
 
         // Copy approuter module
         glob.sync("**", {
@@ -75,12 +75,7 @@ module.exports = class extends Generator {
         };
         mta.modules.push(approuter);
 
-        if (oConfig.platform.includes("Application Router")) {
-            approuter["build-parameters"] = {
-                builder: "custom",
-                commands: ["npm install", "npm run build:ui --prefix .."]
-            };
-        }
+        
         mta.resources.push({
             name: oConfig.projectname + "_destination",
             type: "org.cloudfoundry.managed-service",
@@ -122,7 +117,7 @@ module.exports = class extends Generator {
                 "service-plan": "app-host",
                 service: "html5-apps-repo",
                 config: {
-                    sizeLimit: oConfig.ui5libs.indexOf("Local resources") >= 0 ? 100 : 2
+                    sizeLimit: 100
                 }
             }
         });

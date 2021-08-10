@@ -120,11 +120,9 @@ module.exports = class extends Generator {
 
     async writing() {
         const sModuleName = this.options.oneTimeConfig.modulename;
-        const localResources =
-            this.options.oneTimeConfig.ui5libs === "Local resources (OpenUI5)" ||
-            this.options.oneTimeConfig.ui5libs === "Local resources (SAPUI5)";
-        const platformIsAppRouter = this.options.oneTimeConfig.platform.includes("Application Router");
-        const netweaver = this.options.oneTimeConfig.platform.includes("SAP NetWeaver");
+        
+        const platformIsAppRouter = false;
+        const netweaver = false;
 
         // Write files in new module folder
         this.sourceRoot(path.join(__dirname, "templates"));
@@ -135,8 +133,7 @@ module.exports = class extends Generator {
             const sOrigin = this.templatePath(file);
             const sTarget = this.destinationPath(file.replace("uimodule", sModuleName).replace(/\/_/, "/"));
 
-            const isUnneededFlpSandbox =
-                sTarget.includes("flpSandbox") && this.options.oneTimeConfig.platform !== "SAP Launchpad service";
+            const isUnneededFlpSandbox = false;
             const isUnneededXsApp =
                 sTarget.includes("xs-app") &&
                 !(
@@ -151,56 +148,12 @@ module.exports = class extends Generator {
             this.fs.copyTpl(sOrigin, sTarget, this.options.oneTimeConfig);
         });
 
-        if (this.options.oneTimeConfig.platform.includes("Application Router")) {
-            await fileaccess.manipulateJSON.call(this, "/approuter/xs-app.json", {
-                routes: [
-                    {
-                        source: "^/" + sModuleName + "/(.*)$",
-                        target: "$1",
-                        authenticationType: "none",
-                        localDir: sModuleName + "/webapp"
-                    }
-                ]
-            });
-        }
-
-        if (
-            this.options.oneTimeConfig.platform === "SAP HTML5 Application Repository service for SAP BTP" ||
-            this.options.oneTimeConfig.platform === "SAP Launchpad service"
-        ) {
-            if (this.options.oneTimeConfig.platform === "SAP Launchpad service") {
-                await fileaccess.manipulateJSON.call(this, "/" + sModuleName + "/webapp/manifest.json", {
-                    ["sap.cloud"]: {
-                        service: this.options.oneTimeConfig.projectname + ".service"
-                    },
-                    ["sap.app"]: {
-                        crossNavigation: {
-                            inbounds: {
-                                intent1: {
-                                    signature: {
-                                        parameters: {},
-                                        additionalParameters: "allowed"
-                                    },
-                                    semanticObject: sModuleName,
-                                    action: "display",
-                                    title: this.options.oneTimeConfig.tilename,
-                                    icon: "sap-icon://add"
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
         // Append to Main package.json
         await fileaccess.manipulateJSON.call(this, "/package.json", function (packge) {
             packge.scripts["serve:" + sModuleName] = "ui5 serve --config=" + sModuleName + "/ui5.yaml";
             packge.scripts["build:ui"] += " build:" + sModuleName;
             let buildCommand = "ui5 build --config=" + sModuleName + "/ui5.yaml --clean-dest";
-            if (localResources) {
-                buildCommand += " --a";
-            }
+            
             if (platformIsAppRouter) {
                 buildCommand += ` --dest approuter/${sModuleName}/webapp`;
             } else if (!netweaver) {
@@ -213,32 +166,27 @@ module.exports = class extends Generator {
             return packge;
         });
 
-        if (
-            this.options.oneTimeConfig.platform === "SAP HTML5 Application Repository service for SAP BTP" ||
-            this.options.oneTimeConfig.platform === "SAP Launchpad service"
-        ) {
-            await fileaccess.writeYAML.call(this, "/mta.yaml", (mta) => {
-                const deployer = mta.modules.find((module) => module.name === "webapp_deployer");
+        await fileaccess.writeYAML.call(this, "/mta.yaml", (mta) => {
+            const deployer = mta.modules.find((module) => module.name === "webapp_deployer");
 
-                deployer["build-parameters"]["requires"].push({
-                    name: sModuleName,
-                    artifacts: [`dist/${sModuleName}.zip`],
-                    ["target-path"]: "resources/"
-                });
-
-                mta.modules.push({
-                    name: sModuleName,
-                    type: "html5",
-                    path: sModuleName,
-                    "build-parameters": {
-                        builder: "custom",
-                        commands: [`npm run build:${sModuleName} --prefix ..`],
-                        "supported-platforms": []
-                    }
-                });
-                return mta;
+            deployer["build-parameters"]["requires"].push({
+                name: sModuleName,
+                artifacts: [`dist/${sModuleName}.zip`],
+                ["target-path"]: "resources/"
             });
-        }
+
+            mta.modules.push({
+                name: sModuleName,
+                type: "html5",
+                path: sModuleName,
+                "build-parameters": {
+                    builder: "custom",
+                    commands: [`npm run build:${sModuleName} --prefix ..`],
+                    "supported-platforms": []
+                }
+            });
+            return mta;
+        });
 
         const modules = this.config.get("uimodules") || [];
         modules.push(this.options.oneTimeConfig.modulename);
