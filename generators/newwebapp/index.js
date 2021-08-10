@@ -35,14 +35,6 @@ module.exports = class extends Generator {
                     (this.options.modulename === "uimodule"
                         ? this.options.oneTimeConfig.projectname
                         : this.options.modulename);
-
-                this.composeWith(
-                    require.resolve("../opa5"),
-                    Object.assign({}, this.options.oneTimeConfig, {
-                        isSubgeneratorCall: true,
-                        namespaceUI5Input: this.options.oneTimeConfig.namespaceUI5
-                    })
-                );
             });
         }
 
@@ -125,14 +117,6 @@ module.exports = class extends Generator {
                 this.options.oneTimeConfig.namespaceURI +
                 "/" +
                 (answers.modulename === "uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
-
-            this.composeWith(
-                require.resolve("../opa5"),
-                Object.assign({}, this.options.oneTimeConfig, {
-                    isSubgeneratorCall: true,
-                    namespaceUI5Input: this.options.oneTimeConfig.namespaceUI5
-                })
-            );
         });
     }
 
