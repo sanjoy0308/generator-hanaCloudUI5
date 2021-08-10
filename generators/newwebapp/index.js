@@ -4,8 +4,6 @@ const Generator = require("yeoman-generator"),
     glob = require("glob");
 
 module.exports = class extends Generator {
-    static displayName = "Add a new web app to an existing project";
-
     prompting() {
         if (this.options.isSubgeneratorCall) {
             return this.prompt([
@@ -72,7 +70,7 @@ module.exports = class extends Generator {
                         }
                         return "Please use alpha numeric characters only for the project name.";
                     },
-                    default: "myUI5App"
+                    default: "oldUI5App"
                 },
                 {
                     type: "input",
@@ -84,7 +82,7 @@ module.exports = class extends Generator {
                         }
                         return "Please use alpha numeric characters and dots only for the namespace.";
                     },
-                    default: "com.myorg"
+                    default: "com.orgName"
                 },
                 {
                     type: "list",

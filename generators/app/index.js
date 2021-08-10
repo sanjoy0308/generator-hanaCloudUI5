@@ -7,8 +7,6 @@ const Generator = require("yeoman-generator"),
     glob = require("glob");
 
 module.exports = class extends Generator {
-    static displayName = "Create a new OpenUI5/SAPUI5 project";
-
     prompting() {
         if (!this.options.embedded) {
             this.log(yosay(`Welcome to the ${chalk.red("hanacloudui5-project")} generator!`));
@@ -18,73 +16,26 @@ module.exports = class extends Generator {
             {
                 type: "input",
                 name: "projectname",
-                message: "How do you want to name this project?",
+                message: "What is your on-premise UI5 project name?",
                 validate: (s) => {
                     if (/^\d*[a-zA-Z][a-zA-Z0-9]*$/g.test(s)) {
                         return true;
                     }
                     return "Please use alpha numeric characters only for the project name.";
                 },
-                default: "myUI5App"
+                default: "oldUI5App"
             },
             {
                 type: "input",
                 name: "namespaceUI5",
-                message: "Which namespace do you want to use?",
+                message: "Which namespace do you have for your existing project?",
                 validate: (s) => {
                     if (/^[a-zA-Z0-9_\.]*$/g.test(s)) {
                         return true;
                     }
                     return "Please use alpha numeric characters and dots only for the namespace.";
                 },
-                default: "com.myorg"
-            },
-            {
-                type: "list",
-                name: "platform",
-                message: "On which platform would you like to host the application?",
-                choices: [
-                    "Static webserver",
-                    "Application Router @ Cloud Foundry",
-                    "SAP HTML5 Application Repository service for SAP BTP",
-                    "SAP Launchpad service",
-                    "Application Router @ SAP HANA XS Advanced",
-                    "SAP NetWeaver"
-                ],
-                default: "Static webserver"
-            },
-            {
-                type: "list",
-                name: "viewtype",
-                message: "Which view type do you want to use?",
-                choices: ["XML", "JSON", "JS", "HTML"],
-                default: "XML"
-            },
-            {
-                type: "list",
-                name: "ui5libs",
-                message: "Where should your UI5 libs be served from?",
-                choices: (props) => {
-                    return props.platform !== "SAP Launchpad service"
-                        ? [
-                              "Content delivery network (OpenUI5)",
-                              "Content delivery network (SAPUI5)",
-                              "Local resources (OpenUI5)",
-                              "Local resources (SAPUI5)"
-                          ]
-                        : ["Content delivery network (SAPUI5)"];
-                },
-                default: (props) => {
-                    return props.platform !== "SAP Launchpad service"
-                        ? "Content delivery network (OpenUI5)"
-                        : "Content delivery network (SAPUI5)";
-                }
-            },
-            {
-                type: "confirm",
-                name: "newdir",
-                message: "Would you like to create a new directory for the project?",
-                default: true
+                default: "com.orgName"
             }
         ]).then((answers) => {
             if (answers.newdir) {

@@ -1,9 +1,5 @@
 # Generator for UI5 projects in MTA folder structure
 
-[![Build Status][test-image]][test-url]
-[![Dependency Status][daviddm-image]][daviddm-url]
-[![License Status][license-image]][license-url]
-
 Generator which use the official UI5 tooling from ui5-community and support multiple deployment targets such as the SAP Business Technology Platform.
 
 ## Usage with hanacloudui5
@@ -23,8 +19,6 @@ $> yo hanacloudui5 project
  ´   `  |° ´ Y `
 ```
 
-![generation flow](./docs/embeddedUsage.gif)
-
 Run you can use `npm start` (or `yarn start`) to start the local server for development.
 
 ## Standalone usage
@@ -33,7 +27,7 @@ Note the different greeting when the generator starts.
 
 ```bash
 $> npm i -g yo
-$> yo ./generator-ui5-project
+$> yo ./generator-hanacloudui5
 
      _-----_     ╭──────────────────────────────╮
     |       |    │      Welcome to the          │
@@ -45,8 +39,6 @@ $> yo ./generator-ui5-project
    __'.___.'__
  ´   `  |° ´ Y `
 ```
-
-![generation flow](./docs/standaloneUsage.gif)
 
 ## Target platforms
 
