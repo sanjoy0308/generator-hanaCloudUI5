@@ -1,56 +1,46 @@
 {
-  "name": "generator-hanacloudui5",
-  "version": "1.0.3",
-  "description": "Generator for UI5-based project",
-  "main": "app/index.js",
-  "files": [
-    "app"
-  ],
+  "name": "generator-template-ui5-project",
+  "version": "0.0.4",
+  "description": "(Sub-)generator for a UI5 project",
   "scripts": {
-    "test": "mocha",
-    "postinstall": "node app/postinstall",
-    "lint": "eslint .",
+    "workaround": "find . -name '.DS_Store' -delete",
+    "test:manual": "cd test/ui5-app && ui5 serve",
     "prettier": "prettier --write .",
-    "start": "yo hanacloudui5 project",
-    "listSubGen": "yo hanacloudui5 project --list",
-    "startSubGen": "yo hanacloudui5 project app",
-    "workaround": "find . -name '.DS_Store' -delete"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanjoy0308/generator-hanacloudui5.git"
+    "start": "yo hanacloudui5 project"
   },
   "keywords": [
     "yeoman-generator",
     "sap",
     "sapui5",
     "openui5",
-    "sapbtp",
-    "generator",
-    "scaffold"
+    "ui5",
+    "project-template"
   ],
-  "author": "sanjoy0308",
+  "author": "sanjoy0308 (Sanjoy Saha)",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/sanjoy0308/generator-hanacloudui5/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanjoy0308/generator-hanaCloudUI5.git"
   },
-  "homepage": "https://github.com/sanjoy0308/generator-hanacloudui5#readme",
+  "files": [
+    "helpers",
+    "generators"
+  ],
   "dependencies": {
-    "@octokit/rest": "^18.5.0",
-    "adm-zip": "^0.5.4",
-    "ccxt": "^1.54.63",
     "chalk": "^4.1.0",
-    "colors": "^1.4.0",
-    "mocha": "^8.3.2",
-    "rimraf": "^3.0.2",
-    "yarn-or-npm": "^3.0.1",
-    "yeoman-assert": "^3.1.1",
+    "glob": "^7.1.6",
+    "object-assign-deep": "^0.4.0",
+    "valid-filename": "^3.1.0",
+    "yaml": "^1.10.2",
     "yeoman-environment": "^3.2.0",
     "yeoman-generator": "^4.13.0",
-    "yeoman-test": "^5.1.0",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "execa": "^5.0.0",
+    "mocha": "^8.3.2",
+    "prettier": "2.2.1",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^3.0.0"
   }
 }
