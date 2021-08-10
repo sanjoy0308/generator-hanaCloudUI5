@@ -1,16 +1,15 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
-const spawn = require("cross-spawn");
-const { hasYarn } = require("yarn-or-npm");
+const Generator = require("yeoman-generator"),
+  chalk = require("chalk"),
+  yosay = require("yosay"),
+  spawn = require("cross-spawn"),
+  { hasYarn } = require("yarn-or-npm"),
 
-const path = require("path");
-const fs = require("fs");
-const { rmdir } = require("fs").promises;
+  path = require("path"),
+  fs = require("fs"),
+  { rmdir } = require("fs").promises,
 
-const { Octokit } = require("@octokit/rest");
-const AdmZip = require("adm-zip");
+  { Octokit } = require("@octokit/rest"),
+  AdmZip = require("adm-zip");
 
 const generatorOptions = {
   ghAuthToken: {
@@ -93,9 +92,12 @@ module.exports = class extends Generator {
     }
   }
 
-  async prompting() {
-    this.log(yosay(`Welcome to the ${chalk.red("hanacloudui5")} generator!`));
+  initializing() {
+    this.log(yosay(`Welcome to the ${chalk.red(`HANA Cloud UI5`)} generator!`));
+  }
 
+
+  async prompting() {
     // create the octokit client to retrieve the generators from GH org
     const octokit = new Octokit({
       userAgent: `${this.rootGeneratorName()}:${this.rootGeneratorVersion()}`,
@@ -159,7 +161,7 @@ module.exports = class extends Generator {
         ).generator;
         generator = generatorRepos[generatorIdx];
       }
-
+      
       // fetch the available branches to retrieve the latest commit SHA
       let reqBranch;
       try {
