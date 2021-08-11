@@ -13,7 +13,7 @@ module.exports = class extends Generator {
 
     async prompting() {
         if (!this.options.embedded) {
-            this.log(yosay(`Welcome to the ${chalk.red("hanacloudui5-project")} generator!`));
+            this.log(yosay(`Welcome1 to the ${chalk.red("hanacloudui5-project")} generator!`));
         }       
 
         //this.log("this.config.projectname " + this.config.projectname);

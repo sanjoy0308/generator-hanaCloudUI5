@@ -21,7 +21,6 @@ module.exports = class extends Generator {
 
         const oConfig = this.options.oneTimeConfig;
         const platformIsAppRouter = false; // aka no destination service etc needed
-
         // Copy approuter module
         glob.sync("**", {
             cwd: this.sourceRoot() + "/approuter",
@@ -29,7 +28,7 @@ module.exports = class extends Generator {
         }).forEach((file) => {
             this.fs.copyTpl(
                 this.templatePath("approuter/" + file),
-                this.destinationPath("approuter/" + file.replace(/^_/, "").replace(/\/_/, "/")),
+                this.destinationPath(oConfig.projectname + "-approuter/" + file.replace(/^_/, "").replace(/\/_/, "/")),
                 oConfig
             );
         });
@@ -38,7 +37,7 @@ module.exports = class extends Generator {
             ? "uimodule/index.html"
             : (oConfig.namespaceUI5 + oConfig.projectname + "/").replace(/\./g, "");
 
-        await fileaccess.manipulateJSON.call(this, "/approuter/xs-app.json", {
+        await fileaccess.manipulateJSON.call(this, "/" + oConfig.projectname + "-approuter/xs-app.json", {
             welcomeFile: welcomeRoute,
             authenticationMethod: "none",
             logout: {
@@ -54,7 +53,7 @@ module.exports = class extends Generator {
         }).forEach((file) => {
             this.fs.copyTpl(
                 this.templatePath("deployer/" + file),
-                this.destinationPath("deployer/" + file.replace(/^_/, "").replace(/\/_/, "/")),
+                this.destinationPath(oConfig.projectname + "_ui_deployer/" + file.replace(/^_/, "").replace(/\/_/, "/")),
                 oConfig
             );
         });
