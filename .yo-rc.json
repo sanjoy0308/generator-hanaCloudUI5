@@ -4,6 +4,7 @@
     "namespaceUI5": "com.orgName",
     "namespaceURI": "com/orgName",
     "uimodules": [
+      "uimodule",
       "uimodule"
     ],
     "setupCompleted": true

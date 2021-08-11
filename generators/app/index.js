@@ -9,7 +9,7 @@ const Generator = require("yeoman-generator"),
 module.exports = class extends Generator {
     prompting() {
         if (!this.options.embedded) {
-            this.log(yosay(`Welcome to the ${chalk.red("hanacloudui5-project")} generator!`));
+            this.log(yosay(`Welcome1 to the ${chalk.red("hanacloudui5-project")} generator!`));
         }
 
         return this.prompt([
