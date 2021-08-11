@@ -46,6 +46,18 @@ module.exports = class extends Generator {
             },
             routes: []
         });
+
+        // Copy deployer module
+        glob.sync("**", {
+            cwd: this.sourceRoot() + "/deployer",
+            nodir: true
+        }).forEach((file) => {
+            this.fs.copyTpl(
+                this.templatePath("deployer/" + file),
+                this.destinationPath("deployer/" + file.replace(/^_/, "").replace(/\/_/, "/")),
+                oConfig
+            );
+        });
     }
 
     async addMTA() {
@@ -75,7 +87,8 @@ module.exports = class extends Generator {
         };
         mta.modules.push(approuter);
 
-        
+
+
         mta.resources.push({
             name: oConfig.projectname + "_destination",
             type: "org.cloudfoundry.managed-service",
@@ -117,7 +130,7 @@ module.exports = class extends Generator {
                 "service-plan": "app-host",
                 service: "html5-apps-repo",
                 config: {
-                    sizeLimit: 100
+                    sizeLimit: oConfig.ui5libs.indexOf("Local resources") >= 0 ? 100 : 2
                 }
             }
         });
@@ -151,6 +164,63 @@ module.exports = class extends Generator {
         if (approuter) {
             approuter.requires.push({ name: oConfig.projectname + "_uaa" });
         }
+
+        if (oConfig.platform === "SAP Launchpad service") {
+            mta.modules.push({
+                name: oConfig.projectname + "destination-content",
+                type: "com.sap.application.content",
+                "build-parameters": {
+                    "no-source": true
+                },
+                requires: [
+                    {
+                        name: oConfig.projectname + "_uaa",
+                        parameters: {
+                            "service-key": {
+                                name: oConfig.projectname + "_uaa-key"
+                            }
+                        }
+                    },
+                    {
+                        name: oConfig.projectname + "_html5_repo_host",
+                        parameters: {
+                            "service-key": {
+                                name: oConfig.projectname + "_html5_repo_host-key"
+                            }
+                        }
+                    },
+                    {
+                        name: oConfig.projectname + "_destination",
+                        parameters: {
+                            "content-target": true
+                        }
+                    }
+                ],
+                parameters: {
+                    content: {
+                        instance: {
+                            existing_destinations_policy: "update",
+                            destinations: [
+                                {
+                                    Name: oConfig.projectname + "_html5_repo_host",
+                                    ServiceInstanceName: oConfig.projectname + "_html5_repo_host",
+                                    ServiceKeyName: oConfig.projectname + "_html5_repo_host-key",
+                                    "sap.cloud.service": oConfig.projectname + ".service"
+                                },
+                                {
+                                    Name: oConfig.projectname + "_uaa",
+                                    Authentication: "OAuth2UserTokenExchange",
+                                    ServiceInstanceName: oConfig.projectname + "_uaa",
+                                    ServiceKeyName: oConfig.projectname + "_uaa-key",
+                                    "sap.cloud.service": oConfig.projectname + ".service"
+                                }
+                            ]
+                        }
+                    }
+                }
+            });
+        }
+
         await fileaccess.writeYAML.call(this, "/mta.yaml", mta);
     }
 };
