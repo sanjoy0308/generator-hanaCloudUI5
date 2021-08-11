@@ -90,3 +90,29 @@ exports.manipulateYAML = async function (filePath, override) {
         throw e;
     }
 };
+
+
+// read Component.js javascript file to identify project name and namespace
+exports.readJS = async function (filePath) {
+    try {
+        const fullFilePath = process.cwd() + filePath,
+            oldContent = this.fs.read(fullFilePath),
+            componentPath = oldContent.substring(oldContent.indexOf("UIComponent.extend(\"") + 20, oldContent.indexOf(".Component\"")),
+            componentPathSplit = componentPath.split("."),
+            appName = componentPathSplit[componentPathSplit.length - 1];
+        let namespace = "";
+        for (let index = 0; index < componentPathSplit.length - 1; index++) {
+            const element = componentPathSplit[index];
+            if (index === componentPathSplit.length - 2) {
+                namespace = namespace + element;
+            } else {
+                namespace = namespace + element + ".";
+            }
+        }
+        this.options.namespaceUI5 = namespace;
+        this.options.projectname = appName;
+    } catch (e) {
+        this.log(`Error during the manipulation of the ${filePath} file: ${e}`);
+        throw e;
+    }
+};

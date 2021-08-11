@@ -7,11 +7,16 @@ const Generator = require("yeoman-generator"),
     glob = require("glob");
 
 module.exports = class extends Generator {
-    prompting() {
-        if (!this.options.embedded) {
-            this.log(yosay(`Welcome1 to the ${chalk.red("hanacloudui5-project")} generator!`));
-        }
+    async initializing() {
+        await fileaccess.readJS.call(this, "/webapp/Component.js");
+    }
 
+    async prompting() {
+        if (!this.options.embedded) {
+            this.log(yosay(`Welcome to the ${chalk.red("hanacloudui5-project")} generator!`));
+        }       
+
+        //this.log("this.config.projectname " + this.config.projectname);
         return this.prompt([
             {
                 type: "input",
@@ -23,7 +28,7 @@ module.exports = class extends Generator {
                     }
                     return "Please use alpha numeric characters only for the project name.";
                 },
-                default: "oldUI5App"
+                default: this.options.projectname
             },
             {
                 type: "input",
@@ -35,7 +40,7 @@ module.exports = class extends Generator {
                     }
                     return "Please use alpha numeric characters and dots only for the namespace.";
                 },
-                default: "com.orgName"
+                default: this.options.namespaceUI5
             }
         ]).then((answers) => {
             if (answers.newdir) {
@@ -131,7 +136,7 @@ module.exports = class extends Generator {
         });
         this.spawnCommandSync(
             "git",
-            ["commit", "--quiet", "--allow-empty", "-m", "Initialize repository with hanacloudui5"],
+            ["commit", "--quiet", "--allow-empty", "-m", "Initialize repository with MTA project structure"],
             {
                 cwd: this.destinationPath()
             }
