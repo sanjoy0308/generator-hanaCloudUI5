@@ -1,0 +1,11 @@
+{
+  "generator-hanacloudui5": {
+    "projectname": "SPCDataIngestionMgr",
+    "namespaceUI5": "com.asml",
+    "namespaceURI": "com/asml",
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}
