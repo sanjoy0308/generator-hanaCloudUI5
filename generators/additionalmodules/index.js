@@ -34,7 +34,7 @@ module.exports = class extends Generator {
         });
 
         const welcomeRoute = platformIsAppRouter
-            ? "uimodule/index.html"
+            ? oConfig.projectname + "-uimodule/index.html"
             : (oConfig.namespaceUI5 + oConfig.projectname + "/").replace(/\./g, "");
 
         await fileaccess.manipulateJSON.call(this, "/" + oConfig.projectname + "-approuter/xs-app.json", {

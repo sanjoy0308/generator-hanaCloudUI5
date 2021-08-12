@@ -131,7 +131,7 @@ module.exports = class extends Generator {
             nodir: true
         }).forEach((file) => {
             const sOrigin = this.templatePath(file);
-            const sTarget = this.destinationPath(file.replace("uimodule", sModuleName).replace(/\/_/, "/"));
+            const sTarget = this.destinationPath(file.replace(this.options.oneTimeConfig.projectname + "-uimodule", sModuleName).replace(/\/_/, "/"));
 
             const isUnneededFlpSandbox = false;
             const isUnneededXsApp =
