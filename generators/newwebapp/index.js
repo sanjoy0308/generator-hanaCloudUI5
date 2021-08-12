@@ -62,7 +62,7 @@ module.exports = class extends Generator {
                     type: "input",
                     name: "projectname",
                     message:
-                        "Seems like this project has not been generated with hanacloudui5. Please enter the name your project.",
+                        "Seems like this project has not been generated with ui5_to_mta. Please enter the name your project.",
                     validate: (s) => {
                         if (/^\d*[a-zA-Z][a-zA-Z0-9]*$/g.test(s)) {
                             return true;

@@ -2,15 +2,15 @@
 
 Generator which use the official UI5 tooling from ui5-community and support multiple deployment targets such as the SAP Business Technology Platform.
 
-## Usage with hanacloudui5
+## Usage with ui5_to_mta
 
 ```bash
 $> npm i -g yo
-$> yo hanacloudui5 project
+$> yo ui5_to_mta project
 
      _-----_
     |       |    ╭──────────────────────────────╮
-    |--(o)--|    │  Welcome to the hanacloudui5 │
+    |--(o)--|    │  Welcome to the ui5_to_mta   │
    `---------´   │        generator!            │
     ( _´U`_ )    ╰──────────────────────────────╯
     /___A___\   /
@@ -27,11 +27,11 @@ Note the different greeting when the generator starts.
 
 ```bash
 $> npm i -g yo
-$> yo ./generator-hanacloudui5
+$> yo ./generator-ui5_to_mta
 
      _-----_     ╭──────────────────────────────╮
     |       |    │      Welcome to the          │
-    |--(o)--|    │     hanacloudui5-project     │
+    |--(o)--|    │     ui5_to_mta-project       │
    `---------´   │        generator!            │
     ( _´U`_ )    ╰──────────────────────────────╯
     /___A___\   /

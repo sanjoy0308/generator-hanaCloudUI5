@@ -1,12 +1,12 @@
 {
-  "name": "generator-hanacloudui5",
-  "version": "1.1.1",
+  "name": "generator-ui5_to_mta",
+  "version": "0.0.1",
   "description": "Generator for a UI5 project with MTA structure",
   "scripts": {
     "workaround": "find . -name '.DS_Store' -delete",
     "test:manual": "cd test/ui5-app && ui5 serve",
     "prettier": "prettier --write .",
-    "start": "yo hanacloudui5 project"
+    "start": "yo ui5_to_mta project"
   },
   "keywords": [
     "yeoman-generator",
