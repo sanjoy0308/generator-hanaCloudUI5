@@ -1,11 +1,11 @@
 specVersion: "2.2"
 metadata:
-  name: SPCDataIngestionMgr_uimodule
+  name: SPCDataIngestionMgr_SPCDataIngestionMgr-uimodule
 type: application
 resources:
   configuration:
     paths:
-      webapp: uimodule/webapp
+      webapp: SPCDataIngestionMgr-uimodule/webapp
 framework:
   name: SAPUI5
   version: 1.84.0
@@ -20,17 +20,17 @@ server:
       afterMiddleware: compression
       configuration:
         port: 35729
-        path: uimodule/webapp
+        path: SPCDataIngestionMgr-uimodule/webapp
     - name: ui5-middleware-cfdestination
       afterMiddleware: compression
       configuration:
         debug: true
         port: 1091
-        xsappJson: uimodule/webapp/xs-app.json
+        xsappJson: SPCDataIngestionMgr-uimodule/webapp/xs-app.json
         destinations: []
 builder:
   customTasks:
     -  name: ui5-task-zipper
        afterTask: uglify
        configuration:
-         archiveName: uimodule
+         archiveName: SPCDataIngestionMgr-uimodule
