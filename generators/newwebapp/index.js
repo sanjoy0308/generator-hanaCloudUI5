@@ -20,7 +20,6 @@ module.exports = class extends Generator {
                 this.options.oneTimeConfig.modulename = this.options.modulename;
                 this.options.oneTimeConfig.tilename = answers.tilename;
                 this.options.oneTimeConfig.viewname = "MainView";
-
                 this.options.oneTimeConfig.appId =
                     this.options.oneTimeConfig.namespaceUI5 +
                     "." +
@@ -92,30 +91,7 @@ module.exports = class extends Generator {
                     default: "XML"
                 }
             ]);
-        }
-
-        return this.prompt(aPrompt).then((answers) => {
-            this.options.oneTimeConfig = this.config.getAll();
-            this.options.oneTimeConfig.viewname = "MainView";
-            this.options.oneTimeConfig.modulename = answers.modulename;
-            this.options.oneTimeConfig.tilename = answers.tilename;
-
-            if (answers.projectname) {
-                this.options.oneTimeConfig.projectname = answers.projectname;
-                this.options.oneTimeConfig.namespaceUI5 = answers.namespaceUI5;
-                this.options.oneTimeConfig.namespaceURI = answers.namespaceUI5.split(".").join("/");
-                this.options.oneTimeConfig.viewtype = answers.viewtype;
-            }
-
-            this.options.oneTimeConfig.appId =
-                this.options.oneTimeConfig.namespaceUI5 +
-                "." +
-                (answers.modulename === this.options.oneTimeConfig.projectname + "-uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
-            this.options.oneTimeConfig.appURI =
-                this.options.oneTimeConfig.namespaceURI +
-                "/" +
-                (answers.modulename === this.options.oneTimeConfig.projectname + "-uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
-        });
+        }        
     }
 
     async writing() {
@@ -131,7 +107,8 @@ module.exports = class extends Generator {
             nodir: true
         }).forEach((file) => {
             const sOrigin = this.templatePath(file);
-            const sTarget = this.destinationPath(file.replace(this.options.oneTimeConfig.projectname + "-uimodule", sModuleName).replace(/\/_/, "/"));
+            //const sTarget = this.destinationPath(this.options.oneTimeConfig.projectname + "-uimodule/" + file.replace(/^_/, "").replace(/\/_/, "/"));
+            const sTarget = this.destinationPath(file.replace(this.options.oneTimeConfig.projectname + "-uimodule/", sModuleName).replace(/\/_/, "/"));
 
             const isUnneededFlpSandbox = false;
             const isUnneededXsApp =
