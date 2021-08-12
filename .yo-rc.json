@@ -4,7 +4,8 @@
     "namespaceUI5": "com.asml",
     "namespaceURI": "com/asml",
     "uimodules": [
-      "uimodule"
+      "uimodule",
+      "SPCDataIngestionMgr-uimodule"
     ],
     "setupCompleted": true
   }

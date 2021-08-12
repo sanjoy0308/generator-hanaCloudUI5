@@ -68,7 +68,7 @@ module.exports = class extends Generator {
         const oSubGen = Object.assign({}, oConfig);
         oSubGen.isSubgeneratorCall = true;
         oSubGen.cwd = this.destinationRoot();
-        oSubGen.modulename = "uimodule";
+        oSubGen.modulename = this.options.projectname + "-uimodule";
 
         this.composeWith(require.resolve("../additionalmodules"), oSubGen);
 
@@ -81,7 +81,7 @@ module.exports = class extends Generator {
             name: oConfig.projectname,
             version: "0.0.1",
             scripts: {
-                start: "ui5 serve --config=uimodule/ui5.yaml  --open index.html",
+                start: "ui5 serve --config=" + this.options.projectname + "-uimodule/ui5.yaml  --open index.html",
                 "build:ui": "run-s ",
                 test: "run-s lint karma",
                 "karma-ci": "karma start karma-ci.conf.js",

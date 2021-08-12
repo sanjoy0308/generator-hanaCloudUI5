@@ -24,13 +24,13 @@ module.exports = class extends Generator {
                 this.options.oneTimeConfig.appId =
                     this.options.oneTimeConfig.namespaceUI5 +
                     "." +
-                    (this.options.modulename === "uimodule"
+                    (this.options.modulename === this.options.oneTimeConfig.projectname + "-uimodule"
                         ? this.options.oneTimeConfig.projectname
                         : this.options.modulename);
                 this.options.oneTimeConfig.appURI =
                     this.options.oneTimeConfig.namespaceURI +
                     "/" +
-                    (this.options.modulename === "uimodule"
+                    (this.options.modulename === this.options.oneTimeConfig.projectname + "-uimodule"
                         ? this.options.oneTimeConfig.projectname
                         : this.options.modulename);
             });
@@ -110,11 +110,11 @@ module.exports = class extends Generator {
             this.options.oneTimeConfig.appId =
                 this.options.oneTimeConfig.namespaceUI5 +
                 "." +
-                (answers.modulename === "uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
+                (answers.modulename === this.options.oneTimeConfig.projectname + "-uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
             this.options.oneTimeConfig.appURI =
                 this.options.oneTimeConfig.namespaceURI +
                 "/" +
-                (answers.modulename === "uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
+                (answers.modulename === this.options.oneTimeConfig.projectname + "-uimodule" ? this.options.oneTimeConfig.projectname : answers.modulename);
         });
     }
 
