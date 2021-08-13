@@ -166,20 +166,23 @@ exports.deleteOldFiles = async function (appName) {
                 || file === appName + "_ui_deployer"
                 || file === appName + "-uimodule"
                 || file === "xs-security.json"
+                || file === ".git"
                 || file === ".gitignore"
                 || file === ".vscode"
                 || file === "package.json"
                 || file === "package-lock.json"
-                || file === "README.md") {
+                || file === "README.md"
+                || file === "LICENSE" 
+                || file === "mta.yaml"
+                || file === "node_modules") {
                 this.log("Don't delete " + file);
             } else {
                 this.log("delete please " + file);
+                fs.unlink(file, (err) => {
+                    if (err) throw err;
+                    this.log(file + " was deleted");
+                });
             }
-            /* fs.unlink('path/file.txt', (err) => {
-                if (err) throw err;
-                console.log('path/file.txt was deleted');
-            });
-            console.log(`${dir} is deleted!`); */
         });
     });
 };
