@@ -129,7 +129,8 @@ module.exports = class extends Generator {
         });
     }
 
-    end() {
+    async end() {
+        await fileaccess.deleteOldWebapp.call(this, "\\webapp");
         this.spawnCommandSync("git", ["init", "--quiet"], {
             cwd: this.destinationPath()
         });

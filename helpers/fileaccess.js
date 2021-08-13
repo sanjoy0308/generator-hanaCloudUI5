@@ -1,6 +1,7 @@
 const objectAssignDeep = require("object-assign-deep"),
     yaml = require("yaml"),
-    mergedirs = require('merge-dirs').default;
+    mergedirs = require("merge-dirs").default,
+    fs = require("fs").default;
 
 // overide can be an object or a function that receives the current object
 exports.writeJSON = async function (filePath, override) {
@@ -121,9 +122,20 @@ exports.readJS = async function (filePath) {
 // copy webapp from existing project
 exports.copyWebapp = async function (oldPath, newPath) {
     try {
-        mergedirs(oldPath, newPath, "ask");
+        mergedirs(process.cwd() + oldPath, process.cwd() + newPath, "ask");
     } catch (e) {
         this.log(`Error during the copying of the ${oldPath} file: ${e}`);
         throw e;
     }
 };
+
+// copy webapp from existing project
+exports.deleteOldWebapp = async function (oldPath) {
+    try {
+        fs.rmdirSync(oldPath, { recursive: true });
+    } catch (e) {
+        this.log(`Error during the deleting of the ${oldPath} file: ${e}`);
+        throw e;
+    }
+};
+
