@@ -1,5 +1,6 @@
 const objectAssignDeep = require("object-assign-deep"),
-    yaml = require("yaml");
+    yaml = require("yaml"),
+    mergedirs = require('merge-dirs').default;
 
 // overide can be an object or a function that receives the current object
 exports.writeJSON = async function (filePath, override) {
@@ -113,6 +114,16 @@ exports.readJS = async function (filePath) {
         this.options.projectname = appName;
     } catch (e) {
         this.log(`Error during the manipulation of the ${filePath} file: ${e}`);
+        throw e;
+    }
+};
+
+// copy webapp from existing project
+exports.copyWebapp = async function (oldPath, newPath) {
+    try {
+        mergedirs(oldPath, newPath, "ask");
+    } catch (e) {
+        this.log(`Error during the copying of the ${oldPath} file: ${e}`);
         throw e;
     }
 };

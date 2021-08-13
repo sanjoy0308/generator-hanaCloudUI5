@@ -73,6 +73,8 @@ module.exports = class extends Generator {
         this.composeWith(require.resolve("../additionalmodules"), oSubGen);
 
         this.composeWith(require.resolve("../newwebapp"), oSubGen);
+
+        await fileaccess.copyWebapp.call(this, "\\webapp", "\\" + oSubGen.modulename + "\\webapp");
     }
 
     async addPackage() {

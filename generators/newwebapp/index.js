@@ -112,10 +112,7 @@ module.exports = class extends Generator {
             const isUnneededFlpSandbox = false;
             const isUnneededXsApp =
                 sTarget.includes("xs-app") &&
-                !(
-                    this.options.oneTimeConfig.platform === "SAP Launchpad service" ||
-                    this.options.oneTimeConfig.platform === "SAP HTML5 Application Repository service for SAP BTP"
-                );
+                false;
 
             if (isUnneededXsApp || isUnneededFlpSandbox) {
                 return;
