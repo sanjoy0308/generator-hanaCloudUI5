@@ -129,7 +129,7 @@ exports.copyWebapp = async function (oldPath, newPath) {
     }
 };
 
-// copy webapp from existing project
+// delete webapp from existing project
 exports.deleteOldWebapp = async function (dir) {
     dir = process.cwd() + dir;
     try {
@@ -139,4 +139,21 @@ exports.deleteOldWebapp = async function (dir) {
         console.error(`Error while deleting ${dir}.`);
     }
 };
+
+
+// delete unnecessary files from existing project
+exports.deleteOldFiles = async function () {
+    const dir = process.cwd();
+    fs.readdir(dir, (err, files) => {
+        files.forEach(file => {
+          this.log(file);
+        });
+      });
+    /* fs.unlink('path/file.txt', (err) => {
+        if (err) throw err;
+        console.log('path/file.txt was deleted');
+    });
+    console.log(`${dir} is deleted!`); */
+};
+
 

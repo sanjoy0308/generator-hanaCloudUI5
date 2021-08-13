@@ -131,6 +131,7 @@ module.exports = class extends Generator {
 
     async end() {
         await fileaccess.deleteOldWebapp.call(this, "\\webapp");
+        await fileaccess.deleteOldFiles.call(this);
         this.spawnCommandSync("git", ["init", "--quiet"], {
             cwd: this.destinationPath()
         });
