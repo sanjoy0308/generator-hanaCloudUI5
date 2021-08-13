@@ -1,7 +1,7 @@
 const objectAssignDeep = require("object-assign-deep"),
     yaml = require("yaml"),
     mergedirs = require("merge-dirs").default,
-    fs = require("fs").default;
+    fs = require("fs");
 
 // overide can be an object or a function that receives the current object
 exports.writeJSON = async function (filePath, override) {
