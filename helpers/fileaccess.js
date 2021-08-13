@@ -130,12 +130,13 @@ exports.copyWebapp = async function (oldPath, newPath) {
 };
 
 // copy webapp from existing project
-exports.deleteOldWebapp = async function (oldPath) {
+exports.deleteOldWebapp = async function (dir) {
+    dir = process.cwd() + dir;
     try {
-        fs.rmdirSync(oldPath, { recursive: true });
-    } catch (e) {
-        this.log(`Error during the deleting of the ${oldPath} file: ${e}`);
-        throw e;
+        fs.rmdirSync(dir, { recursive: true });
+        console.log(`${dir} is deleted!`);
+    } catch (err) {
+        console.error(`Error while deleting ${dir}.`);
     }
 };
 
