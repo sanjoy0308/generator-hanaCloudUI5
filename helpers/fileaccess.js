@@ -146,9 +146,9 @@ exports.deleteOldFiles = async function () {
     const dir = process.cwd();
     fs.readdir(dir, (err, files) => {
         files.forEach(file => {
-          this.log(file);
+            this.log(file);
         });
-      });
+    });
     /* fs.unlink('path/file.txt', (err) => {
         if (err) throw err;
         console.log('path/file.txt was deleted');
@@ -172,12 +172,10 @@ exports.deleteOldFiles = async function (appName) {
                 || file === "package.json"
                 || file === "package-lock.json"
                 || file === "README.md"
-                || file === "LICENSE" 
+                || file === "LICENSE"
                 || file === "mta.yaml"
                 || file === "node_modules") {
-                this.log("Don't delete " + file);
             } else {
-                this.log("delete please " + file);
                 fs.unlink(file, (err) => {
                     if (err) throw err;
                     this.log(file + " was deleted");

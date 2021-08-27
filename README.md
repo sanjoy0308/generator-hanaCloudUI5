@@ -1,6 +1,8 @@
 # Generator for UI5 projects in MTA folder structure
 
-Generator which use the official UI5 tooling from ui5-community and support multiple deployment targets such as the SAP Business Technology Platform.
+Generator which use the official UI5 tooling MTA structure from ui5-community and support the SAP Business Technology Platform deployment target.
+
+:warning: This process modifies/deletes several files. Please use this tool when your code is under source control or backed up
 
 ## Usage with ui5_to_mta
 
@@ -40,21 +42,11 @@ $> yo ./generator-ui5_to_mta
  ´   `  |° ´ Y `
 ```
 
-## Target platforms
-
-During the prompting phase, the generator will ask on which target platform your app should run. Currently, the following options are available:
-
 ### SAP HTML5 Application Repository service for SAP BTP
 
 This option is a more sophisticate way to serve the web app from Cloud Foundry-based environments. 
 
-## Deployment
-
-Depending on your target platform you'll need to install additional tools:
-
-### Cloud Foundry
-
-Deployment steps:
+### Deployment steps:
 
 Call this command from the root directory to deploy the application to Cloud Foundry
 
